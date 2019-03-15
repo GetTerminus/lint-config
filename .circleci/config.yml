@@ -1,0 +1,51 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: benjamincharity/terminus-ui-ci
+
+    working_directory: ~/ci-build
+
+    steps:
+      - add_ssh_keys
+
+      - checkout
+
+      - restore_cache:
+          name: Restore Yarn Cache
+          keys:
+            - yarn
+
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+          name: Save Yarn Cache
+          key: yarn
+          paths:
+            - ./node_modules
+
+      - run:
+          name: Lint
+          command: yarn run lint:ci
+
+      - run:
+          name: Release
+          command: npx semantic-release
+
+      - store_artifacts:
+          path: /home/circleci/.npm/_logs/
+          destination: ~/npm_logs/
+
+
+
+
+# HACK: This will allow tags to kick off the deploy process. Correct syntax support is coming soon:
+# https://discuss.circleci.com/t/git-tag-deploys-in-2-0/9493/8
+deployment:
+  fake_deploy_for_cci2:
+    tag: /.*/
+    commands:
+      - echo "make tags run in 2.0"
