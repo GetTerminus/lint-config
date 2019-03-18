@@ -1,14 +1,14 @@
 {
-  "name": "@terminus/lint-config",
+  "name": "@terminus/frontend-lint-config",
   "version": "0.0.0-PLACEHOLDER",
   "description": "Terminus Lint configurations.",
-  "homepage": "https://github.com/GetTerminus/lint-config",
+  "homepage": "https://github.com/GetTerminus/frontend-lint-config",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GetTerminus/lint-config.git"
+    "url": "https://github.com/GetTerminus/frontend-lint-config.git"
   },
   "bugs": {
-    "url": "https://github.com/GetTerminus/lint-config/issues"
+    "url": "https://github.com/GetTerminus/frontend-lint-config/issues"
   },
   "main": "./ci.js",
   "scripts": {

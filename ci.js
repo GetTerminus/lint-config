@@ -9,6 +9,14 @@ module.exports = {
     'codelyzer',
   ],
 
+  // Define a TS enabled parser
+  'parser': '@typescript-eslint/parser',
+
+  // Include plugins to extend functionality
+  'plugins': [
+    '@typescript-eslint',
+  ],
+
   'rules': {
     // Having consistent whitespace in an Angular expression makes the template more readable.
     // #codelyzer #has-fixer

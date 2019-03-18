@@ -1,6 +1,6 @@
-# Terminus TSLint Configuration
+# Terminus lint Configurations
 
-A collection of extendable TSLint configurations created for Terminus.
+A collection of extendable lint configurations created for Terminus.
 
 
 ## Installation
@@ -8,17 +8,21 @@ A collection of extendable TSLint configurations created for Terminus.
 1. Install the NPM package:
 
 ```
-$ yarn add @terminus/tslint-config -D
+$ yarn add @terminus/frontend-lint-config -D
 ```
 
 2. Extend this package in your project:
 
 ```
-// your project's tslint.json:
-{
-  "extends": [
-    "@terminus/tslint-config"
-  ]
+// your project's .eslintrc.js
+module.exports = {
+  extends: ["@terminus/frontend-lint-config"],
+  parserOptions: {
+    ecmaVersion: 6,
+    // This should point to your primary tsconfig.json
+    project: "./tsconfig.json",
+    sourceType: "module"
+  }
 }
 ```
 
@@ -42,11 +46,15 @@ This ruleset extends the `ci` ruleset but softens the rules to turn many stylist
 Target the `development` ruleset:
 
 ```
-// your project's tslint.json:
-{
-  "extends": [
-    "@terminus/tslint-config/development"
-  ]
+// your project's .eslintrc.js
+module.exports = {
+  extends: ["@terminus/frontend-lint-config/development"],
+  parserOptions: {
+    ecmaVersion: 6,
+    // This should point to your primary tsconfig.json
+    project: "./tsconfig.json",
+    sourceType: "module"
+  }
 }
 ```
 
@@ -60,11 +68,15 @@ This ruleset extends the `development` ruleset but softens the rules further to 
 Target the `testing` ruleset:
 
 ```
-// your project's tslint.json:
-{
-  "extends": [
-    "@terminus/tslint-config/testing"
-  ]
+// your project's .eslintrc.js
+module.exports = {
+  extends: ["@terminus/frontend-lint-config/testing"],
+  parserOptions: {
+    ecmaVersion: 6,
+    // This should point to your primary tsconfig.json
+    project: "./tsconfig.json",
+    sourceType: "module"
+  }
 }
 ```
 
