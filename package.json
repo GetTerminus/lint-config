@@ -16,7 +16,7 @@
     "semantic-release": "semantic-release",
     "check:next-release": "npx semantic-release --no-ci --dry-run",
     "lint": "npx eslint ci.js development.js testing.js .eslintrc.js --no-ignore --fix",
-    "lint:ci": "npx eslint --project ./ts-config.json",
+    "lint:ci": "npx eslint ci.js development.js testing.js .eslintrc.js --no-ignore",
     "//=> Section: Tooling": "==============================",
     "lint-staged": "lint-staged",
     "validate:circleci": "circleci config validate -c .circleci/config.yml",

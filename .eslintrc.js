@@ -21,8 +21,8 @@ module.exports = {
       'always',
     ],
     'quote-props': [
-      "error",
-      "always",
+      'error',
+      'always',
     ],
   },
 };
