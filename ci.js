@@ -6,7 +6,7 @@ module.exports = {
 
   // Extend existing rulesets
   'extends': [
-    'codelyzer',
+    './node_modules/codelyzer/index.js',
   ],
 
   // Define a TS enabled parser
@@ -14,10 +14,25 @@ module.exports = {
 
   // Include plugins to extend functionality
   'plugins': [
-    '@typescript-eslint',
+    /*
+     *'@typescript-eslint',
+     */
+    '@typescript-eslint/tslint',
   ],
 
   'rules': {
+
+    /*
+ *    '@typescript-eslint/tslint/config': [
+ *      'warn',
+ *      {
+ *        'rulesDirectory': [
+ *          // array of paths to directories with rules, e.g. 'node_modules/tslint/lib/rules' (will be used if `lintFile` is not specified)
+ *          './node_modules/codelyzer/index.js',
+ *        ],
+ *      }],
+ *
+ */
     // Having consistent whitespace in an Angular expression makes the template more readable.
     // #codelyzer #has-fixer
     'angular-whitespace': [
@@ -151,7 +166,7 @@ module.exports = {
 
     // Prevent possible accidental execution due to missing brackets
     // #tslint #has-fixer
-    'curly': true,
+    'curly': 'error',
 
     // Explicit behavior is easier to maintain.
     'default-case': 'error',

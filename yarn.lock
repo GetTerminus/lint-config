@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@angular/compiler@^7.2.9":
+  version "7.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-7.2.9.tgz#92dd0d9fd26fa7cfdbc8c75d0be0d96bd6432fbb"
+  integrity sha512-jAKV4C5BW2pnke10fiDZNbLCQOs2QK37mUJWe5jnZqCAM4Y3edXlfifOkbi0hvA4WJMDXKmUdydY6Xo/Z+cWbA==
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/core@^7.2.9":
+  version "7.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.2.9.tgz#43ca94adf74fd8ad9ba0b015b3b979a5d04fb3a6"
+  integrity sha512-tW1jHjCnvtquJ3XEnmqRNMoV7MXAZ2yfnCXE25+odRZjNVMiTcKWvRLd/XjBzjCg2OvwREXcQpB7/s+Av10uAQ==
+  dependencies:
+    tslib "^1.9.0"
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -228,6 +242,13 @@
   version "11.11.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.3.tgz#7c6b0f8eaf16ae530795de2ad1b85d34bf2f5c58"
   integrity sha512-wp6IOGu1lxsfnrD+5mX6qwSwWuqsdkKKxTN4aQc4wByHAKZJf9/D4KXPQ1POUjEbnCP5LMggB0OEFNY9OTsMqg==
+
+"@typescript-eslint/eslint-plugin-tslint@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin-tslint/-/eslint-plugin-tslint-1.4.2.tgz#5777f4aaa7004f7b21925cf050faadd9f078b183"
+  integrity sha512-/kMgZrNPuKCcx19yJTVDzIn0qy4qo4NvC8JDfQmFCmqv7KOUb2MqlDy85fivaBkdbFHFsXJpwGDjRs48hn1O7Q==
+  dependencies:
+    lodash.memoize "^4.1.2"
 
 "@typescript-eslint/eslint-plugin@^1.4.2":
   version "1.4.2"
@@ -3272,6 +3293,11 @@ lodash.isstring@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
   integrity sha1-1SfftUVuynzJu5XV2ur4i6VKVFE=
+
+lodash.memoize@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
+  integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
 lodash.set@^4.3.2:
   version "4.3.2"
