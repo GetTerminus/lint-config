@@ -1,13 +1,11 @@
 {
   "name": "@terminus/eslint-config-frontend",
-  "version": "0.0.0-PLACEHOLDER",
+  "version": "0.0.1",
   "description": "Terminus Lint configurations.",
   "homepage": "https://github.com/GetTerminus/eslint-config-frontend",
   "keywords": [
     "eslint",
-    "eslintconfig",
-    "tslint",
-    "tslintconfig"
+    "eslintconfig"
   ],
   "repository": {
     "type": "git",

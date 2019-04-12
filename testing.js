@@ -1,18 +1,22 @@
 module.exports = {
   'extends': './development.js',
+
+  // TODO: likely not needed due to eslint overrides array?
+
+  // Add Jest to the list of environments
   'env': {
     'jest': true,
   },
-  'rules': {
-    // TODO: for dev only - remove
-    'component-selector': [
-      true,
-      'element',
-      'bar',
-      'kebab-case',
-    ],
 
-    // This allows easy access to private properties in tests
-    'no-string-literal': false,
+  'rules': {
+
+    // TODO: for dev only - remove
+    'indent': {
+      'severity': 'warning',
+      'options': [
+        'spaces',
+        8,
+      ],
+    },
   },
 };

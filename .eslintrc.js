@@ -1,5 +1,15 @@
 module.exports = {
+  "parserOptions": {
+    "ecmaVersion": 2017,
+  },
+  "env": {
+    "es6": true,
+  },
   'rules': {
+    'array-bracket-newline': [
+      'error',
+      'always',
+    ],
     'array-element-newline': [
       'error',
       'always',
@@ -11,6 +21,10 @@ module.exports = {
     'indent': [
       'error',
       2,
+    ],
+    'object-curly-newline': [
+      'error',
+      'always',
     ],
     'quotes': [
       'error',
