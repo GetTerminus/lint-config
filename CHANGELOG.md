@@ -1,0 +1,11 @@
+## 1.0.0 (2019-04-16)
+
+* Merge pull request #1 from GetTerminus/remove-testing ([014aea6](https://github.com/GetTerminus/eslint-config-frontend/commit/014aea6)), closes [#1](https://github.com/GetTerminus/eslint-config-frontend/issues/1)
+* WIP ([37cd85d](https://github.com/GetTerminus/eslint-config-frontend/commit/37cd85d))
+* fix: linting issue ([bd83bc3](https://github.com/GetTerminus/eslint-config-frontend/commit/bd83bc3))
+* fix: removed reference to missing file ([79bac8f](https://github.com/GetTerminus/eslint-config-frontend/commit/79bac8f))
+* feat: First pass at ci and dev rules ([9acbda7](https://github.com/GetTerminus/eslint-config-frontend/commit/9acbda7))
+* feat: Rulesets and Docs finalized ([8e2c506](https://github.com/GetTerminus/eslint-config-frontend/commit/8e2c506))
+* WIP: ci ruleset complete ([3625e76](https://github.com/GetTerminus/eslint-config-frontend/commit/3625e76))
+* WIP: fix lint command ([a31c221](https://github.com/GetTerminus/eslint-config-frontend/commit/a31c221))
+* WIP: switch to eslint ([f0937fa](https://github.com/GetTerminus/eslint-config-frontend/commit/f0937fa))
