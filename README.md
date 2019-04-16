@@ -1,5 +1,11 @@
 <h1>Terminus ESLint Frontend Configuration</h1>
 
+[![CircleCI][circle-badge]][circle-link]
+[![semantic-release][semantic-release-badge]][semantic-release]
+[![MIT License][license-image]][license-url]
+[![NPM version][npm-version-image]][npm-url]
+[![Github release][gh-release-badge]][gh-releases]
+
 A collection of JavaScript lint rules for Terminus frontend codebases.
 
 > For TSLint configuration, see: https://github.com/GetTerminus/tslint-config-frontend
@@ -134,3 +140,22 @@ Create an ESLint config file at the root level named `.eslintrc` and extend the 
 Each rule is accompanied by a comment outlining the reasoning behind the decision to include the rule.
 
 For most rules, see [`ci.js`](./ci.js).
+
+
+
+
+<!--
+  LINKS
+-->
+
+<!-- BADGES -->
+[circle-badge]:           https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/master.svg?style=shield
+[npm-version-image]:      http://img.shields.io/npm/v/@terminus/eslint-config-frontend.svg
+[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[license-image]:          http://img.shields.io/badge/license-MIT-blue.svg
+[gh-release-badge]:       https://img.shields.io/github/release/GetTerminus/eslint-config-frontend.svg
+[gh-releases]:            https://github.com/GetTerminus/eslint-config-frontend/releases/
+[circle-link]:            https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/master
+[semantic-release]:       https://github.com/semantic-release/semantic-release
+[npm-url]:                https://npmjs.org/package/@terminus/eslint-config-frontend
+[license-url]:            https://github.com/GetTerminus/eslint-config-frontend/blob/master/LICENSE
