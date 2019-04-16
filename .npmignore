@@ -1,6 +1,9 @@
+.circleci
+.github
 node_modules
 tooling
-.circleci
+.eslintrc.js
+CODE_OF_CONDUCT.md
 ts-config.json
-tslint.json
+yarn-error.log
 yarn.lock

@@ -10,7 +10,6 @@ module.exports = {
     'array-element-newline': SEVERITY,
     'arrow-body-style': SEVERITY,
     'arrow-parens': SEVERITY,
-    'arrow-return-shorthand': SEVERITY,
     'arrow-spacing': SEVERITY,
     'brace-style': SEVERITY,
     'camelcase': SEVERITY,
