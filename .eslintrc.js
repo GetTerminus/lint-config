@@ -1,9 +1,9 @@
 module.exports = {
-  "parserOptions": {
-    "ecmaVersion": 2017,
+  'parserOptions': {
+    'ecmaVersion': 2017,
   },
-  "env": {
-    "es6": true,
+  'env': {
+    'es6': true,
   },
   'rules': {
     'array-bracket-newline': [
