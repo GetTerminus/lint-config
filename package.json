@@ -1,6 +1,6 @@
 {
   "name": "@terminus/eslint-config-frontend",
-  "version": "0.0.1",
+  "version": "0.0.0-PLACEHOLDER",
   "description": "Terminus Lint configurations.",
   "homepage": "https://github.com/GetTerminus/eslint-config-frontend",
   "keywords": [
@@ -17,8 +17,8 @@
   "main": "./ci.js",
   "scripts": {
     "//=> Section: Linting": "==============================",
-    "lint": "npx eslint ci.js development.js testing.js .eslintrc.js --no-ignore --fix",
-    "lint:ci": "npx eslint ci.js development.js testing.js .eslintrc.js --no-ignore",
+    "lint": "npx eslint ci.js development.js .eslintrc.js --no-ignore --fix",
+    "lint:ci": "npx eslint ci.js development.js .eslintrc.js --no-ignore",
     "//=> Section: Release": "==============================",
     "semantic-release": "semantic-release",
     "check:next-release": "npx semantic-release --no-ci --dry-run",
