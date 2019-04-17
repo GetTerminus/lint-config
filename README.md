@@ -149,13 +149,13 @@ For most rules, see [`ci.js`](./ci.js).
 -->
 
 <!-- BADGES -->
-[circle-badge]:           https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/master.svg?style=shield
+[circle-badge]:           https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/release.svg?style=shield
 [npm-version-image]:      http://img.shields.io/npm/v/@terminus/eslint-config-frontend.svg
 [semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [license-image]:          http://img.shields.io/badge/license-MIT-blue.svg
 [gh-release-badge]:       https://img.shields.io/github/release/GetTerminus/eslint-config-frontend.svg
 [gh-releases]:            https://github.com/GetTerminus/eslint-config-frontend/releases/
-[circle-link]:            https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/master
+[circle-link]:            https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/release
 [semantic-release]:       https://github.com/semantic-release/semantic-release
 [npm-url]:                https://npmjs.org/package/@terminus/eslint-config-frontend
-[license-url]:            https://github.com/GetTerminus/eslint-config-frontend/blob/master/LICENSE
+[license-url]:            https://github.com/GetTerminus/eslint-config-frontend/blob/release/LICENSE
