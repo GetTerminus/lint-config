@@ -88,7 +88,7 @@ module.exports = {
     // confusing code which may be prone to errors or difficult to modify.
     'complexity': [
       SEVERITY,
-      10,
+      20,
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
@@ -99,7 +99,12 @@ module.exports = {
     ],
 
     // Explicit behavior is easier to maintain.
-    'default-case': SEVERITY,
+    'default-case': [
+      SEVERITY,
+      {
+        'commentPattern': '^skip\\sdefault',
+      },
+    ],
 
     // Helps to maintain a consistent, readable style in the codebase.
     // #hasFixer
@@ -179,6 +184,8 @@ module.exports = {
         'ImportDeclaration': 1,
         'MemberExpression': 1,
         'ObjectExpression': 1,
+        'SwitchCase': 1,
+        'flatTernaryExpressions': true,
       },
     ],
 
@@ -229,7 +236,12 @@ module.exports = {
     'no-caller': SEVERITY,
 
     // In certain places the arrow function syntax could be confused with a comparison operator.
-    'no-confusing-arrow': SEVERITY,
+    'no-confusing-arrow': [
+      SEVERITY,
+      {
+        'allowParens': true,
+      },
+    ],
 
     // In general, console methods aren’t appropriate for production code.
     'no-console': SEVERITY,
@@ -295,6 +307,10 @@ module.exports = {
     // constructors throws a SyntaxError only when the code is executed.
     'no-invalid-regexp': SEVERITY,
 
+    // While examples such as window are obvious, there are often hundreds of built-in global objects provided by JavaScript environments.
+    // It can be hard to know if you’re assigning to a global variable or not.
+    'no-global-assign': SEVERITY,
+
     // Eliminate unnecessary and potentially confusing blocks at the top level of a script or within other blocks.
     'no-lone-blocks': SEVERITY,
 
@@ -307,8 +323,11 @@ module.exports = {
     'no-magic-numbers': [
       SEVERITY,
       {
-        // 1 can be useful in situations where it has no explicit value (eg `arr.length - 1`)
+        // `0` is useful for checking existence (eg `index < 0`)
+        // `1` is useful in situations where it has no explicit value (eg `arr.length - 1`)
         'ignore': [
+          -1,
+          0,
           1,
         ],
         // Allow targeting array indexes without a variable
@@ -351,6 +370,11 @@ module.exports = {
     // impossible to access the variable in the containing scope and obscures to what value an identifier actually refers.
     'no-shadow': SEVERITY,
 
+    // ES5 §15.1.1 Value Properties of the Global Object (NaN, Infinity, undefined) as well as strict mode restricted identifiers eval and
+    // arguments are considered to be restricted names in JavaScript. Defining them to mean something else can have unintended consequences
+    // and confuse others reading the code.
+    'no-shadow-restricted-names': SEVERITY,
+
     // Missing elements are probably an accidentally duplicated comma.
     'no-sparse-arrays': SEVERITY,
 
@@ -368,9 +392,6 @@ module.exports = {
     // Locate potential ReferenceErrors resulting from misspellings of variable and parameter names, or accidental implicit globals (for
     // example, from forgetting the var keyword in a for loop initializer).
     'no-undef': SEVERITY,
-
-    // Because undefined can be overwritten or shadowed, reading undefined can give an unexpected value.
-    'no-undefined': SEVERITY,
 
     // A variable that is declared and not initialized to any value automatically gets the value of undefined.
     // #hasFixer
@@ -399,7 +420,12 @@ module.exports = {
     'no-unsafe-negation': SEVERITY,
 
     // Detects potential errors where an assignment or function call was intended.
-    'no-unused-expressions': SEVERITY,
+    'no-unused-expressions': [
+      SEVERITY,
+      {
+        'allowTernary': true,
+      },
+    ],
 
     // It’s unnecessary to use computed properties with literals.
     // #hasFixer
@@ -407,9 +433,6 @@ module.exports = {
 
     // Useless string concatenation is likely the result of refactoring where a variable was removed from the concatenation.
     'no-useless-concat': SEVERITY,
-
-    // JavaScript implicitly adds a blank constructor when there isn’t one. It’s not necessary to manually add one in.
-    'no-useless-constructor': SEVERITY,
 
     // Declaring variables using var has several edge case behaviors that make var unsuitable for modern code. Variables declared by var
     // have their parent function block as their scope, ignoring other control flow statements. vars have declaration “hoisting” (similar to
@@ -434,7 +457,10 @@ module.exports = {
           'minProperties': 2,
           'multiline': true,
         },
-        'ObjectExpression': 'always',
+        'ObjectExpression': {
+          'minProperties': 1,
+          'multiline': true,
+        },
       },
     ],
 
@@ -459,8 +485,13 @@ module.exports = {
     // Helps to maintain a consistent, readable style in the codebase.
     // #hasFixer
     'operator-linebreak': [
-      SEVERITY,
+      'error',
       'before',
+      {
+        'overrides': {
+          '=': 'ignore',
+        },
+      },
     ],
 
     // If a variable is never reassigned, using the const declaration is better.
@@ -490,7 +521,7 @@ module.exports = {
     // #hasFixer
     'quote-props': [
       SEVERITY,
-      'as-needed',
+      'consistent-as-needed',
     ],
 
     // Always specify this parameter to eliminate reader confusion and to guarantee predictable behavior. Different implementations produce
@@ -504,10 +535,6 @@ module.exports = {
     // Helps to maintain a consistent, readable style in the codebase.
     // #hasFixer
     'semi-spacing': SEVERITY,
-
-    // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
-    'semi-style': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
     // #hasFixer
@@ -554,18 +581,33 @@ module.exports = {
   'overrides': [
     // Spec files:
     {
+      'files': [
+        '**/*.spec.ts',
+        '**/*.mock.ts',
+      ],
       'env': {
         'jest': true,
       },
-      'files': [
-        '**/*.spec.ts',
-      ],
       'rules': {
         'dot-notation': 'off',
         'guard-for-in': 'off',
         'line-comment-position': 'off',
         'no-console': 'off',
         'no-magic-numbers': 'off',
+        'no-underscore-dangle': 'off',
+      },
+    },
+    // Test helper files:
+    {
+      'files': [
+        '**/testing/**/*.ts',
+      ],
+      'env': {
+        'jest': true,
+      },
+      'rules': {
+        'no-magic-numbers': 'off',
+        'no-underscore-dangle': 'off',
       },
     },
   ],

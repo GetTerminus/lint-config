@@ -59,7 +59,7 @@ your `package.json` will allow for easy composability of commands once all linte
 
 #### 1. Create the file and extend our ruleset
 
-Create a ESLint config file at the root level named `.eslintrc-ci` and extend the base ruleset:
+Create a ESLint config file at the root level named `.eslintrc-ci.js` and extend the base ruleset:
 
 - The `project` key should point to the primary app `tsconfig` file.
 
@@ -79,13 +79,13 @@ Create a ESLint config file at the root level named `.eslintrc-ci` and extend th
 
 #### 2. Add a linting command to `package.json`
 
-- The `--config` flag reference should point to the `.eslintrc-ci` file.
+- The `--config` flag reference should point to the `.eslintrc-ci.js` file.
 
 ```json
 {
   "name": "My Project",
   "scripts": {
-    "lint:eslint:ci": "npx eslint \"src/**/*.{js,ts}\" --config .eslintrc-ci"
+    "lint:eslint:ci": "npx eslint \"src/**/*.{js,ts}\" --config .eslintrc-ci.js"
   }
 }
 ```
@@ -99,7 +99,7 @@ This ruleset extends the `ci` ruleset but softens the rules to turn many stylist
 
 #### 1. Create the file and extend our ruleset
 
-Create an ESLint config file at the root level named `.eslintrc` and extend the development ruleset:
+Create an ESLint config file at the root level named `.eslintrc.js` and extend the development ruleset:
 
 - The `project` key should point to the primary app `tsconfig` file.
 
@@ -130,6 +130,19 @@ Create an ESLint config file at the root level named `.eslintrc` and extend the 
   },
   "rules": {
     "quotes": ["off"]
+  }
+}
+```
+
+#### 3. Add a linting command to `package.json`
+
+- The `--config` flag reference should point to the `.eslintrc.js` file.
+
+```json
+{
+  "name": "My Project",
+  "scripts": {
+    "lint:eslint": "npx eslint \"src/**/*.{js,ts}\" --config .eslintrc.js"
   }
 }
 ```
