@@ -1,3 +1,8 @@
+## <small>1.0.2 (2019-04-30)</small>
+
+* fix: rule changes after integrating in the UI library ([3c96484](https://github.com/GetTerminus/eslint-config-frontend/commit/3c96484))
+* fix: rule changes after integrating in the UI library (#6) ([1ae4aa3](https://github.com/GetTerminus/eslint-config-frontend/commit/1ae4aa3)), closes [#6](https://github.com/GetTerminus/eslint-config-frontend/issues/6)
+
 ## <small>1.0.1 (2019-04-17)</small>
 
 * Merge pull request #5 from GetTerminus/adjust-deps ([f25913b](https://github.com/GetTerminus/eslint-config-frontend/commit/f25913b)), closes [#5](https://github.com/GetTerminus/eslint-config-frontend/issues/5)
