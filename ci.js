@@ -424,6 +424,7 @@ module.exports = {
       SEVERITY,
       {
         'allowTernary': true,
+        'allowShortCircuit': true,
       },
     ],
 
@@ -458,7 +459,7 @@ module.exports = {
           'multiline': true,
         },
         'ObjectExpression': {
-          'minProperties': 1,
+          'minProperties': 2,
           'multiline': true,
         },
       },
