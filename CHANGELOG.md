@@ -1,3 +1,8 @@
+## <small>1.0.3 (2019-05-09)</small>
+
+* fix: update rule settings ([2da52c1](https://github.com/GetTerminus/eslint-config-frontend/commit/2da52c1))
+* fix: update rule settings (#7) ([ab684ff](https://github.com/GetTerminus/eslint-config-frontend/commit/ab684ff)), closes [#7](https://github.com/GetTerminus/eslint-config-frontend/issues/7)
+
 ## <small>1.0.2 (2019-04-30)</small>
 
 * fix: rule changes after integrating in the UI library ([3c96484](https://github.com/GetTerminus/eslint-config-frontend/commit/3c96484))
