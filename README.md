@@ -63,13 +63,13 @@ Create a ESLint config file at the root level named `.eslintrc-ci.js` and extend
 
 - The `project` key should point to the primary app `tsconfig` file.
 
-```json
-{
-  "extends": ["@terminus/eslint-config-frontend"],
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "project": "./tsconfig.json",
-    "sourceType": "module"
+```javascript
+module.exports = {
+  extends: ['@terminus/eslint-config-frontend'],
+  parserOptions: {
+    ecmaVersion: 6,
+    project: './tsconfig.json',
+    sourceType: 'module'
   }
 }
 ```
@@ -103,13 +103,13 @@ Create an ESLint config file at the root level named `.eslintrc.js` and extend t
 
 - The `project` key should point to the primary app `tsconfig` file.
 
-```json
-{
-  "extends": ["@terminus/frontend-lint-config/development"],
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "project": "./tsconfig.json",
-    "sourceType": "module"
+```javascript
+module.exports = {
+ extends: ['@terminus/eslint-config-frontend/development'],
+  parserOptions: {
+    ecmaVersion: 6,
+    project: './tsconfig.json',
+    sourceType: 'module'
   }
 }
 ```
@@ -120,16 +120,16 @@ Create an ESLint config file at the root level named `.eslintrc.js` and extend t
 
 - The `project` key should point to the primary app `tsconfig` file.
 
-```json
-{
-  "extends": ["@terminus/frontend-lint-config/development"],
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "project": "./tsconfig.json",
-    "sourceType": "module"
+```javascript
+module.exports = {
+  extends: ['@terminus/eslint-config-frontend/development'],
+  parserOptions: {
+    ecmaVersion: 6,
+    project: './tsconfig.json',
+    sourceType: 'module'
   },
-  "rules": {
-    "quotes": ["off"]
+  rules: {
+    quotes: ['off']
   }
 }
 ```
