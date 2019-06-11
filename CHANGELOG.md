@@ -1,3 +1,12 @@
+## <small>1.0.4 (2019-06-11)</small>
+
+* fix: 🤖 update dependencies ([8a88eb6](https://github.com/GetTerminus/eslint-config-frontend/commit/8a88eb6)), closes [#17](https://github.com/GetTerminus/eslint-config-frontend/issues/17)
+* chore(deps): bump fstream from 1.0.11 to 1.0.12 ([3a6a577](https://github.com/GetTerminus/eslint-config-frontend/commit/3a6a577))
+* chore(deps): bump handlebars from 4.1.0 to 4.1.2 (#20) ([9ee496f](https://github.com/GetTerminus/eslint-config-frontend/commit/9ee496f)), closes [#20](https://github.com/GetTerminus/eslint-config-frontend/issues/20)
+* chore(deps): bump js-yaml from 3.12.2 to 3.13.1 ([402f9a0](https://github.com/GetTerminus/eslint-config-frontend/commit/402f9a0))
+* docs: ✏️ update incorrect configuration docs ([ff3b8cd](https://github.com/GetTerminus/eslint-config-frontend/commit/ff3b8cd))
+* Create CODEOWNERS file ([82277a3](https://github.com/GetTerminus/eslint-config-frontend/commit/82277a3))
+
 ## <small>1.0.3 (2019-05-09)</small>
 
 * fix: update rule settings ([2da52c1](https://github.com/GetTerminus/eslint-config-frontend/commit/2da52c1))
