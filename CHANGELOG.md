@@ -1,3 +1,7 @@
+## <small>1.0.5 (2019-06-11)</small>
+
+* fix: 🐛 update peer dependencies ([731eba8](https://github.com/GetTerminus/eslint-config-frontend/commit/731eba8))
+
 ## <small>1.0.4 (2019-06-11)</small>
 
 * fix: 🤖 update dependencies ([8a88eb6](https://github.com/GetTerminus/eslint-config-frontend/commit/8a88eb6)), closes [#17](https://github.com/GetTerminus/eslint-config-frontend/issues/17)
