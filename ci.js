@@ -8,9 +8,6 @@ module.exports = {
     'node': true,
   },
 
-  // Define the cli output format
-  'format': 'stylish',
-
   // Define a TS enabled parser
   // NOTE: Even though we aren't enforcing any TypeScript rules here, this is still needed so that ESLint can understand `.ts` files
   'parser': '@typescript-eslint/parser',
