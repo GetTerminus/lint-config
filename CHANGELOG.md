@@ -1,3 +1,7 @@
+## <small>1.0.7 (2019-07-23)</small>
+
+* fix: 🐛 revert format setting ([132c5a9](https://github.com/GetTerminus/eslint-config-frontend/commit/132c5a9))
+
 ## <small>1.0.6 (2019-07-23)</small>
 
 * fix: 🐛 output format set to 'stylish' ([33cb78a](https://github.com/GetTerminus/eslint-config-frontend/commit/33cb78a)), closes [#16](https://github.com/GetTerminus/eslint-config-frontend/issues/16)
