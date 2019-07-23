@@ -1,3 +1,8 @@
+## <small>1.0.6 (2019-07-23)</small>
+
+* fix: 🐛 output format set to 'stylish' ([33cb78a](https://github.com/GetTerminus/eslint-config-frontend/commit/33cb78a)), closes [#16](https://github.com/GetTerminus/eslint-config-frontend/issues/16)
+* chore(deps): bump lodash from 4.17.11 to 4.17.14 ([1d87563](https://github.com/GetTerminus/eslint-config-frontend/commit/1d87563))
+
 ## <small>1.0.5 (2019-06-11)</small>
 
 * fix: 🐛 update peer dependencies ([731eba8](https://github.com/GetTerminus/eslint-config-frontend/commit/731eba8))
