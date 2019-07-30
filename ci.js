@@ -467,6 +467,13 @@ module.exports = {
 
     // Helps to maintain a consistent, readable style in the codebase.
     // #hasFixer
+    'object-curly-spacing': [
+      SEVERITY,
+      'always',
+    ],
+
+    // Helps to maintain a consistent, readable style in the codebase.
+    // #hasFixer
     'object-property-newline': SEVERITY,
 
     // Enforces use of ES6 object literal shorthand.
