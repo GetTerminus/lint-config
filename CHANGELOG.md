@@ -1,3 +1,7 @@
+## 1.1.0 (2019-08-02)
+
+* feat: 🎸 enforce object curly spacing ([8a1b712](https://github.com/GetTerminus/eslint-config-frontend/commit/8a1b712)), closes [#25](https://github.com/GetTerminus/eslint-config-frontend/issues/25)
+
 ## <small>1.0.7 (2019-07-23)</small>
 
 * fix: 🐛 revert format setting ([132c5a9](https://github.com/GetTerminus/eslint-config-frontend/commit/132c5a9))
