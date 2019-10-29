@@ -5,6 +5,7 @@
 [![MIT License][license-image]][license-url]
 [![NPM version][npm-version-image]][npm-url]
 [![Github release][gh-release-badge]][gh-releases]
+[![Greenkeeper badge][greenkeeper-badge]][greenkeeper-url]
 
 A collection of JavaScript lint rules for Terminus frontend codebases.
 
@@ -26,6 +27,7 @@ A collection of JavaScript lint rules for Terminus frontend codebases.
 
 
 ## Installation
+
 
 1. Install the package:
 
@@ -172,3 +174,5 @@ For most rules, see [`ci.js`](./ci.js).
 [semantic-release]:       https://github.com/semantic-release/semantic-release
 [npm-url]:                https://npmjs.org/package/@terminus/eslint-config-frontend
 [license-url]:            https://github.com/GetTerminus/eslint-config-frontend/blob/release/LICENSE
+[greenkeeper-badge]:      https://badges.greenkeeper.io/GetTerminus/eslint-config-frontend.svg
+[greenkeeper-url]:        https://greenkeeper.io/
