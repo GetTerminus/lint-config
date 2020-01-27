@@ -138,7 +138,7 @@
     "cz-customizable": "^6.2.0",
     "doctoc": "^1.4.0",
     "husky": "^4.0.2",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "^10.0.3",
     "semantic-release": "^15.13.12",
     "typescript": "~3.6.4",
     "validate-commit-msg": "^2.14.0"
