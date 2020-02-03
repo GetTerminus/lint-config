@@ -39,13 +39,13 @@ module.exports = {
 
   'scopes': [
     {
-      'name': 'CI Rules',
+      'name': 'CIRules',
     },
     {
-      'name': 'Dev Rules',
+      'name': 'DevRules',
     },
     {
-      'name': 'Spec Rules',
+      'name': 'SpecRules',
     },
     {
       'name': 'Build',
