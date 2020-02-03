@@ -1,3 +1,18 @@
+## <small>1.1.1 (2020-02-03)</small>
+
+* fix(CIRules): remove file overrides ([fe0f4b8](https://github.com/GetTerminus/eslint-config-frontend/commit/fe0f4b8))
+* chore(deps): bump eslint-utils from 1.3.1 to 1.4.2 ([23c3f57](https://github.com/GetTerminus/eslint-config-frontend/commit/23c3f57))
+* chore(deps): bump handlebars from 4.1.2 to 4.5.3 ([6cc6b0a](https://github.com/GetTerminus/eslint-config-frontend/commit/6cc6b0a))
+* chore(deps): bump mixin-deep from 1.3.1 to 1.3.2 ([977b91d](https://github.com/GetTerminus/eslint-config-frontend/commit/977b91d))
+* chore: fix incorrectly named items ([3d09736](https://github.com/GetTerminus/eslint-config-frontend/commit/3d09736))
+* chore: update codeowners ([759a0bd](https://github.com/GetTerminus/eslint-config-frontend/commit/759a0bd))
+* chore(package): update dependencies ([bbd60cd](https://github.com/GetTerminus/eslint-config-frontend/commit/bbd60cd))
+* chore(package): update husky to version 4.0.2 ([57ff232](https://github.com/GetTerminus/eslint-config-frontend/commit/57ff232))
+* chore(package): update lockfile yarn.lock ([f1ef2ee](https://github.com/GetTerminus/eslint-config-frontend/commit/f1ef2ee))
+* chore(package): update lockfile yarn.lock ([4c83f67](https://github.com/GetTerminus/eslint-config-frontend/commit/4c83f67))
+* chore: use correct team reference for codeowners ([be563f3](https://github.com/GetTerminus/eslint-config-frontend/commit/be563f3))
+* docs(readme): add Greenkeeper badge ([8b8dfae](https://github.com/GetTerminus/eslint-config-frontend/commit/8b8dfae))
+
 ## 1.1.0 (2019-08-02)
 
 * feat: 🎸 enforce object curly spacing ([8a1b712](https://github.com/GetTerminus/eslint-config-frontend/commit/8a1b712)), closes [#25](https://github.com/GetTerminus/eslint-config-frontend/issues/25)
