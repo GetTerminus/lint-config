@@ -12,6 +12,10 @@ module.exports = {
   // NOTE: Even though we aren't enforcing any TypeScript rules here, this is still needed so that ESLint can understand `.ts` files
   'parser': '@typescript-eslint/parser',
 
+  'plugins': [
+    '@typescript-eslint',
+  ],
+
   'parserOptions': {
     'ecmaVersion': 6,
     'sourceType': 'module',
@@ -586,37 +590,7 @@ module.exports = {
   /*
    * Override rules for specific file patterns
    */
-  'overrides': [
-    // Spec files:
-    {
-      'files': [
-        '**/*.spec.ts',
-        '**/*.mock.ts',
-      ],
-      'env': {
-        'jest': true,
-      },
-      'rules': {
-        'dot-notation': 'off',
-        'guard-for-in': 'off',
-        'line-comment-position': 'off',
-        'no-console': 'off',
-        'no-magic-numbers': 'off',
-        'no-underscore-dangle': 'off',
-      },
-    },
-    // Test helper files:
-    {
-      'files': [
-        '**/testing/**/*.ts',
-      ],
-      'env': {
-        'jest': true,
-      },
-      'rules': {
-        'no-magic-numbers': 'off',
-        'no-underscore-dangle': 'off',
-      },
-    },
-  ],
+  //'overrides': [
+  // NOTE: Currently, override inheritence is not working so overrides are defined at the consumer level.
+  //],
 };
