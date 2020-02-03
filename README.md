@@ -17,11 +17,12 @@ A collection of JavaScript lint rules for Terminus frontend codebases.
 **Table of Contents**
 
 - [Installation](#installation)
-- [Rulesets overview](#rulesets-overview)
+- [Ruleset overview](#ruleset-overview)
 - [Set up](#set-up)
   - [CI](#ci)
   - [Development](#development)
-- [Rule Decisions](#rule-decisions)
+- [Rule decisions](#rule-decisions)
+- [File overrides](#file-overrides)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -36,9 +37,9 @@ $ yarn add eslint @terminus/eslint-config-frontend -D
 ```
 
 
-## Rulesets overview
+## Ruleset overview
 
-There are 2 rulesets defined for ESLint:
+There are 2 sets of rules defined for ESLint:
 
 1. **[CI](#CI)**: This is the default ruleset. This is meant to be used during your CI builds so it throws hard errors when issues are
    found.
@@ -73,7 +74,7 @@ module.exports = {
     project: './tsconfig.json',
     sourceType: 'module'
   }
-}
+};
 ```
 
 > Linting during the CI process is the most strict and will fail if _any_ issues are found. The only way a linting issue makes it to CI is
@@ -113,7 +114,7 @@ module.exports = {
     project: './tsconfig.json',
     sourceType: 'module'
   }
-}
+};
 ```
 
 #### 2. Add project specific rules
@@ -133,7 +134,7 @@ module.exports = {
   rules: {
     quotes: ['off']
   }
-}
+};
 ```
 
 #### 3. Add a linting command to `package.json`
@@ -150,12 +151,41 @@ module.exports = {
 ```
 
 
-## Rule Decisions
+## Rule decisions
 
 Each rule is accompanied by a comment outlining the reasoning behind the decision to include the rule.
 
 For most rules, see [`ci.js`](./ci.js).
 
+## File overrides
+
+Rules can be adjusted for specific globs at the consumer level using [ESLint file overrides][eslint-file-overrides]:
+
+```javascript
+module.exports = {
+  "extends": ['@terminus/eslint-config-frontend/development'],
+  "overrides": [
+    // Disable certain rules for spec and mock files:
+    {
+      "files": [
+        "*.spec.ts",
+        "*.mock.ts",
+      ],
+      "env": {
+        "jest": true,
+      },
+      "rules": {
+        "dot-notation": "off",
+        "guard-for-in": "off",
+        "line-comment-position": "off",
+        "no-console": "off",
+        "no-magic-numbers": "off",
+        "no-underscore-dangle": "off",
+      },
+    },
+  ],
+};
+```
 
 
 
@@ -176,3 +206,4 @@ For most rules, see [`ci.js`](./ci.js).
 [license-url]:            https://github.com/GetTerminus/eslint-config-frontend/blob/release/LICENSE
 [greenkeeper-badge]:      https://badges.greenkeeper.io/GetTerminus/eslint-config-frontend.svg
 [greenkeeper-url]:        https://greenkeeper.io/
+[eslint-file-overrides]:  https://eslint.org/docs/user-guide/configuring#disabling-rules-only-for-a-group-of-files
