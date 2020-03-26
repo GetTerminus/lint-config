@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "config:base",
+    "schedule:nonOfficeHours"
+  ],
+  "masterIssue": true,
+  "packageRules": [
+    {
+      "packagePatterns": ["jest"],
+      "groupName": "Jest Packages"
+    },
+    {
+      "packagePatterns": ["eslint"],
+      "groupName": "ESLint Packages"
+    },
+    {
+      "packagePatterns": ["^@semantic-release"],
+      "groupName": "SemanticRelease Packages"
+    }
+  ],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "rebaseLabel": "Action: rebase",
+  "rebaseConflictedPrs": false,
+  "rebaseStalePrs": false,
+  "reviewers": [
+    "team:uxe"
+  ],
+  "semanticCommits": true,
+  "semanticCommitScope": "Packages",
+  "semanticCommitType": "chore",
+  "stabilityDays": 1,
+  "vulnerabilityAlerts": {
+    "labels": ["Focus: security"],
+    "assignees": ["team:uxe"]
+  }
+}
