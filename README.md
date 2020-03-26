@@ -1,15 +1,18 @@
 <h1>Terminus ESLint Frontend Configuration</h1>
 
-[![CircleCI][circle-badge]][circle-link]
-[![semantic-release][semantic-release-badge]][semantic-release]
-[![MIT License][license-image]][license-url]
 [![NPM version][npm-version-image]][npm-url]
 [![Github release][gh-release-badge]][gh-releases]
-[![Greenkeeper badge][greenkeeper-badge]][greenkeeper-url]
+[![CircleCI][circle-badge]][circle-link]
+[![DavidDM][david-badge]][david-link]
+[![DavidDM Dev][david-dev-badge]][david-link]
+<br>
+[![semantic-release][semantic-release-badge]][semantic-release]
+[![Renovate][renovate-badge]][renovate-link]
+[![ZenHub][zenhub-image]][zenhub-url]
+[![MIT License][license-image]][license-url]
 
-A collection of JavaScript lint rules for Terminus frontend codebases.
 
-> For TSLint configuration, see: https://github.com/GetTerminus/tslint-config-frontend
+A collection of JavaScript & TypeScript lint rules for Terminus frontend codebases.
 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -19,8 +22,8 @@ A collection of JavaScript lint rules for Terminus frontend codebases.
 - [Installation](#installation)
 - [Ruleset overview](#ruleset-overview)
 - [Set up](#set-up)
-  - [CI](#ci)
-  - [Development](#development)
+  - [1. Create a config file and extend the Terminus ruleset](#1-create-a-config-file-and-extend-the-terminus-ruleset)
+  - [2. Override rule definitions as needed](#2-override-rule-definitions-as-needed)
 - [Rule decisions](#rule-decisions)
 - [File overrides](#file-overrides)
 
@@ -30,136 +33,93 @@ A collection of JavaScript lint rules for Terminus frontend codebases.
 ## Installation
 
 
-1. Install the package:
+1. Install the package & required dependencies:
 
 ```
-$ yarn add eslint @terminus/eslint-config-frontend -D
+$ yarn add eslint \
+  @terminus/eslint-config-frontend \
+  @angular-eslint/eslint-plugin \
+  @angular-eslint/eslint-plugin-template \
+  @angular-eslint/template-parser \
+  @typescript-eslint/eslint-plugin \
+  @typescript-eslint/parser -D
 ```
 
 
 ## Ruleset overview
 
-There are 2 sets of rules defined for ESLint:
+Using ESLint's [file override ability][eslint-file-overrides] our config now lives in a single file.
 
-1. **[CI](#CI)**: This is the default ruleset. This is meant to be used during your CI builds so it throws hard errors when issues are
-   found.
-    - NOTE: `.spec` files have some rules relaxed.
-2. **[Development](#Development)**: This enforces all the same rules as the CI ruleset but infractions are reported as warnings rather than
-   errors.
-
-> NOTE: TSLint requires a separate config for spec files while ESLint's configuration adjusts based on configuration within the base
-> ruleset.
+- Base rules are applied to all linted files.
+- TypeScript & Angular specific rules are applied to `.ts` files.
+- HTML rules are applied to `*.component.html` files (currently no HTML rules active).
 
 
 ## Set up
 
-You will need to set up separate configs and scripts for each ruleset: `ci` and `development`. Creating a custom script call for each within
-your `package.json` will allow for easy composability of commands once all linters are set up.
 
-### CI
+### 1. Create a config file and extend the Terminus ruleset
 
-[`CI Rules`](./ci.js)
+Create a ESLint config file at the root level named `.eslintrc.js` and extend the base ruleset:
 
-#### 1. Create the file and extend our ruleset
+```javascript
+module.exports = {
+  extends: ['@terminus/eslint-config-frontend'],
+};
+```
 
-Create a ESLint config file at the root level named `.eslintrc-ci.js` and extend the base ruleset:
-
-- The `project` key should point to the primary app `tsconfig` file.
+NOTE: If your primary TSConfig file is at the project root and named `tsconfig.json` *you need to overwrite the parser
+options to point to your config file*.
 
 ```javascript
 module.exports = {
   extends: ['@terminus/eslint-config-frontend'],
   parserOptions: {
-    ecmaVersion: 6,
-    project: './tsconfig.json',
-    sourceType: 'module'
+    project: './my/custom/tsconfig.special.json',
   }
 };
 ```
 
-> Linting during the CI process is the most strict and will fail if _any_ issues are found. The only way a linting issue makes it to CI is
-> because someone didn't lint before commiting.
+> NOTE: Linting during the CI process is the most strict and will fail if _any_ issues are found. The only way a linting
+> issue makes it to CI is because someone didn't lint before committing.
 
-#### 2. Add a linting command to `package.json`
+### 2. Override rule definitions as needed
 
-- The `--config` flag reference should point to the `.eslintrc-ci.js` file.
-
-```json
-{
-  "name": "My Project",
-  "scripts": {
-    "lint:eslint:ci": "npx eslint \"src/**/*.{js,ts}\" --config .eslintrc-ci.js"
-  }
-}
-```
-
-
-### Development
-
-This ruleset extends the `ci` ruleset but softens the rules to turn many stylistic issues into warnings in order to not impede development.
-
-[`Development Rules`](./development.js)
-
-#### 1. Create the file and extend our ruleset
-
-Create an ESLint config file at the root level named `.eslintrc.js` and extend the development ruleset:
-
-- The `project` key should point to the primary app `tsconfig` file.
-
+// TODO: Do they need to overwrite entire rule or only prefix??
 ```javascript
 module.exports = {
- extends: ['@terminus/eslint-config-frontend/development'],
-  parserOptions: {
-    ecmaVersion: 6,
-    project: './tsconfig.json',
-    sourceType: 'module'
-  }
-};
-```
-
-#### 2. Add project specific rules
-
-> NOTE: When adjusting an ESLint rule, the entire rule doesn **not** need to be defined again.
-
-- The `project` key should point to the primary app `tsconfig` file.
-
-```javascript
-module.exports = {
-  extends: ['@terminus/eslint-config-frontend/development'],
-  parserOptions: {
-    ecmaVersion: 6,
-    project: './tsconfig.json',
-    sourceType: 'module'
-  },
+  extends: ['@terminus/eslint-config-frontend'],
   rules: {
-    quotes: ['off']
-  }
+    '@angular-eslint/prefer-on-push-component-change-detection': 'error',
+  },
 };
 ```
 
 #### 3. Add a linting command to `package.json`
 
-- The `--config` flag reference should point to the `.eslintrc.js` file.
+Example scripts:
 
 ```json
 {
   "name": "My Project",
   "scripts": {
-    "lint:eslint": "npx eslint \"src/**/*.{js,ts}\" --config .eslintrc.js"
+    "app:lint:ts": "npx eslint \"projects/my-app/**/*.{js,ts}\" --config .eslintrc.js",
+    "app:lint:ts:fix": "yarn run app:lint:ts --fix"
   }
 }
 ```
-
 
 ## Rule decisions
 
 Each rule is accompanied by a comment outlining the reasoning behind the decision to include the rule.
 
-For most rules, see [`ci.js`](./ci.js).
+See [`rules.js`](rules.js).
 
 ## File overrides
 
 Rules can be adjusted for specific globs at the consumer level using [ESLint file overrides][eslint-file-overrides]:
+
+> NOTE: Several rules are already disabled for `.spec` and `.mock` files.
 
 ```javascript
 module.exports = {
@@ -171,16 +131,8 @@ module.exports = {
         "*.spec.ts",
         "*.mock.ts",
       ],
-      "env": {
-        "jest": true,
-      },
       "rules": {
-        "dot-notation": "off",
-        "guard-for-in": "off",
-        "line-comment-position": "off",
-        "no-console": "off",
         "no-magic-numbers": "off",
-        "no-underscore-dangle": "off",
       },
     },
   ],
@@ -193,17 +145,21 @@ module.exports = {
   LINKS
 -->
 
-<!-- BADGES -->
 [circle-badge]:           https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/release.svg?style=shield
+[circle-link]:            https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/release
 [npm-version-image]:      http://img.shields.io/npm/v/@terminus/eslint-config-frontend.svg
-[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[license-image]:          http://img.shields.io/badge/license-MIT-blue.svg
+[npm-url]:                https://npmjs.org/package/@terminus/eslint-config-frontend
 [gh-release-badge]:       https://img.shields.io/github/release/GetTerminus/eslint-config-frontend.svg
 [gh-releases]:            https://github.com/GetTerminus/eslint-config-frontend/releases/
-[circle-link]:            https://circleci.com/gh/GetTerminus/eslint-config-frontend/tree/release
+[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release]:       https://github.com/semantic-release/semantic-release
-[npm-url]:                https://npmjs.org/package/@terminus/eslint-config-frontend
+[license-image]:          http://img.shields.io/badge/license-MIT-blue.svg
 [license-url]:            https://github.com/GetTerminus/eslint-config-frontend/blob/release/LICENSE
-[greenkeeper-badge]:      https://badges.greenkeeper.io/GetTerminus/eslint-config-frontend.svg
-[greenkeeper-url]:        https://greenkeeper.io/
 [eslint-file-overrides]:  https://eslint.org/docs/user-guide/configuring#disabling-rules-only-for-a-group-of-files
+[zenhub-image]:           https://dxssrr2j0sq4w.cloudfront.net/3.2.0/img/external/zenhub-badge.png
+[zenhub-url]:             https://github.com/GetTerminus/eslint-config-frontend#zenhub
+[renovate-badge]:         https://img.shields.io/badge/renovate-enabled-brightgreen.svg
+[renovate-link]:          https://renovatebot.com
+[david-dev-badge]:        https://david-dm.org/GetTerminus/eslint-config-frontend/dev-status.svg
+[david-badge]:            https://david-dm.org/GetTerminus/eslint-config-frontend.svg
+[david-link]:             https://david-dm.org/GetTerminus/eslint-config-frontend?view=list

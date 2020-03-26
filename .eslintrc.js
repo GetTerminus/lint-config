@@ -24,7 +24,11 @@ module.exports = {
     ],
     'object-curly-newline': [
       'error',
-      'always',
+      {
+        'consistent': true,
+        'minProperties': 2,
+        'multiline': true,
+      },
     ],
     'quotes': [
       'error',

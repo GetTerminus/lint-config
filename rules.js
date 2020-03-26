@@ -1,6 +1,11 @@
 const SEVERITY = 'error';
+const DISABLED = 'off';
 
 module.exports = {
+  'extends': [
+    'plugin:import/typescript',
+  ],
+
   // Enable specific environments/globals
   'env': {
     'es6': true,
@@ -8,12 +13,16 @@ module.exports = {
     'node': true,
   },
 
-  // Define a TS enabled parser
-  // NOTE: Even though we aren't enforcing any TypeScript rules here, this is still needed so that ESLint can understand `.ts` files
-  'parser': '@typescript-eslint/parser',
-
   'plugins': [
     '@typescript-eslint',
+    // https://github.com/gund/eslint-plugin-deprecation
+    'deprecation',
+    // https://github.com/gajus/eslint-plugin-jsdoc
+    'jsdoc',
+    // https://github.com/benmosher/eslint-plugin-import
+    'import',
+    // https://github.com/TristonJ/eslint-plugin-prefer-arrow
+    'prefer-arrow',
   ],
 
   'parserOptions': {
@@ -25,32 +34,26 @@ module.exports = {
   },
 
   // NOTE: ESLint considers imported interfaces 'unused' so we let cannot use it's unused variable check.
-  // NOTE: Rules are tagged if it is fixable: `#hasFixer`
   'rules': {
-
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'array-bracket-newline': [
       SEVERITY,
       'consistent',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'array-bracket-spacing': [
       SEVERITY,
       'never',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'array-element-newline': [
       SEVERITY,
       'consistent',
     ],
 
     // Maintain stylistic consistency with other arrow function definitions.
-    // #hasFixer
     'arrow-body-style': [
       SEVERITY,
       'as-needed',
@@ -58,33 +61,27 @@ module.exports = {
 
     // Arrow functions can omit parentheses when they have exactly one parameter. In all other cases the parameter(s) must be wrapped in
     // parentheses.
-    // #hasFixer
     'arrow-parens': [
       SEVERITY,
       'as-needed',
     ],
 
     // Maintain stylistic consistency with other arrow function definitions.
-    // #hasFixer
     'arrow-spacing': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'brace-style': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'camelcase': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'comma-dangle': [
       SEVERITY,
       'always-multiline',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'comma-spacing': SEVERITY,
 
     // TODO: verify this doesn't throw too many warnings in engage
@@ -96,11 +93,16 @@ module.exports = {
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'computed-property-spacing': [
       SEVERITY,
       'never',
     ],
+
+    // The second call to ‘super()’ will fail at runtime.
+    'constructor-super': SEVERITY,
+
+    // Prevent possible accidental execution due to missing brackets
+    'curly': SEVERITY,
 
     // Explicit behavior is easier to maintain.
     'default-case': [
@@ -110,8 +112,10 @@ module.exports = {
       },
     ],
 
+    // Deprecated code should be refactored
+    'deprecation/deprecation': SEVERITY,
+
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'dot-location': [
       SEVERITY,
       'property',
@@ -120,18 +124,15 @@ module.exports = {
     // The dot notation is often preferred because it is easier to read, less verbose, and works better with aggressive JavaScript
     // minimizers.
     // For TypeScript if `--noImplicitAny` is turned off, property access via a string literal will be ‘any’ if the property does not exist.
-    // #hasFixer
     'dot-notation': SEVERITY,
 
     // It is a standard convention to end files with a newline.
-    // #hasFixer
     'eol-last': [
       SEVERITY,
       'always',
     ],
 
     // Strict equality is more explicit.
-    // #hasFixer
     'eqeqeq': [
       SEVERITY,
       'always',
@@ -145,14 +146,12 @@ module.exports = {
     'for-direction': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'func-call-spacing': [
       SEVERITY,
       'never',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'function-paren-newline': [
       SEVERITY,
       'consistent',
@@ -165,14 +164,31 @@ module.exports = {
     'guard-for-in': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'implicit-arrow-linebreak': [
       SEVERITY,
       'beside',
     ],
 
+    // Enforce the order of imports
+    'import/order': [
+      SEVERITY,
+      {
+        'newlines-between': 'always-and-inside-groups',
+        'alphabetize': {
+          'order': 'asc',
+          'caseInsensitive': true,
+        },
+      },
+    ],
+
+    // Ensures an imported module can be resolved to a module on the local filesystem, as defined by standard Node require.resolve
+    // behavior.
+    'import/no-unresolved': SEVERITY,
+
+    // This rule aims to remove modules with side-effects by reporting when a module is imported but not assigned.
+    'import/no-unassigned-import': SEVERITY,
+
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'indent': [
       SEVERITY,
       2,
@@ -194,16 +210,32 @@ module.exports = {
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
+    'jsdoc/check-alignment': SEVERITY,
+    'jsdoc/check-param-names': SEVERITY,
+    'jsdoc/check-tag-names': [
+      SEVERITY,
+      {
+        'definedTags': [
+          'internal',
+        ],
+      },
+    ],
+    'jsdoc/newline-after-description': SEVERITY,
+    'jsdoc/require-hyphen-before-param-description': SEVERITY,
+    'jsdoc/require-jsdoc': SEVERITY,
+    'jsdoc/require-param': SEVERITY,
+    'jsdoc/no-types': SEVERITY,
+    'jsdoc/valid-types': SEVERITY,
+
+    // Helps to maintain a consistent, readable style in the codebase.
     'key-spacing': [
       SEVERITY,
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'keyword-spacing': SEVERITY,
 
     // Enforce consistent line endings independent of operating system, VCS, or editor used across your codebase.
-    // #hasFixer
     'linebreak-style': [
       SEVERITY,
       'unix',
@@ -247,16 +279,20 @@ module.exports = {
       },
     ],
 
-    // In general, console methods aren’t appropriate for production code.
+    // In general, console methods aren't appropriate for production code.
     'no-console': SEVERITY,
 
     // We cannot modify variables that are declared using const keyword. It will raise a runtime error.
     'no-const-assign': SEVERITY,
 
+    // Invalid or irregular whitespace causes issues with ECMAScript 5 parsers and also makes code harder to debug in a similar nature
+    // to mixed tabs and spaces.
+    'no-irregular-whitespace': SEVERITY,
+
     // A constant expression (for example, a literal) as a test condition might be a typo or development trigger for a specific behavior.
     'no-constant-condition': SEVERITY,
 
-    // In general, debugger statements aren’t appropriate for production code.
+    // In general, debugger statements are not appropriate for production code.
     'no-debugger': SEVERITY,
 
     // If more than one parameter has the same name in a function definition, the last occurrence “shadows” the preceding occurrences. A
@@ -279,20 +315,18 @@ module.exports = {
     'no-duplicate-imports': SEVERITY,
 
     // If an if block contains a return statement, the else block becomes unnecessary.
-    // #hasFixer
     'no-else-return': SEVERITY,
 
-    // Empty blocks are often indicators of missing code.
+    // Empty block statements, while not technically errors, usually occur due to refactoring that wasn't completed.
+    // They can cause confusion when reading code.
     'no-empty': SEVERITY,
 
     // In contexts such as an if statement’s test where the result of the expression will already be coerced to a Boolean, casting to a
     // Boolean via double negation (!!) or a Boolean call is unnecessary.
-    // #hasFixer
     'no-extra-boolean-cast': SEVERITY,
 
     // Typing mistakes and misunderstandings about where semicolons are required can lead to semicolons that are unnecessary. While not
     // technically an error, extra semicolons can cause confusion when reading code.
-    // #hasFixer
     'no-extra-semi': SEVERITY,
 
     // eval() is dangerous as it allows arbitrary code execution with full privileges.
@@ -319,12 +353,11 @@ module.exports = {
     'no-lone-blocks': SEVERITY,
 
     // If an if statement is the only statement in the else block, it is often clearer to use an else if form.
-    // #hasFixer
     'no-lonely-if': SEVERITY,
 
     // Magic numbers should be avoided as they often lack documentation. Forcing them to be stored in variables gives them implicit
     // documentation.
-    'no-magic-numbers': [
+    '@typescript-eslint/no-magic-numbers': [
       SEVERITY,
       {
         // `0` is useful for checking existence (eg `index < 0`)
@@ -336,6 +369,8 @@ module.exports = {
         ],
         // Allow targeting array indexes without a variable
         'ignoreArrayIndexes': true,
+        'ignoreNumericLiteralTypes': true,
+        'ignoreEnums': false,
       },
     ],
 
@@ -345,12 +380,11 @@ module.exports = {
     // Helps to maintain a consistent, readable style in the codebase.
     'no-mixed-spaces-and-tabs': SEVERITY,
 
-    // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
+    // This rule aims to reduce the scrolling required when reading through your code.
     'no-multiple-empty-lines': [
       SEVERITY,
       {
-        'max': 4,
+        'max': 2,
         'maxEOF': 1,
       },
     ],
@@ -361,6 +395,34 @@ module.exports = {
     // There is little reason to use String, Number, or Boolean as constructors. In almost all cases, the regular function-call version is
     // more appropriate.
     'no-new-wrappers': SEVERITY,
+
+    // Don't allow debugging logs to enter production
+    'no-restricted-syntax': [
+      SEVERITY,
+      {
+        'selector': 'CallExpression[callee.object.name="console"][callee.property.name=/^(debug|info|time|timeEnd|trace)$/]',
+        'message': 'Unexpected property on console object was called',
+      },
+    ],
+
+    // For some libraries, importing the library directly can cause unused submodules to be loaded, so you may want to block these imports
+    // and require that users directly import only the submodules they need. In other cases, you may simply want to ban an import because
+    // using it is undesirable or unsafe.
+    'no-restricted-imports': [
+      SEVERITY,
+      {
+        'paths': [
+          {
+            'name': 'rxjs/Rx',
+            'message': 'Please import directly from \'rxjs\' instead',
+          },
+          {
+            'name': 'lodash',
+            'message': 'Please import directly from lodash individual modules instead',
+          },
+        ],
+      },
+    ],
 
     // In JavaScript assignment can happen at almost any point. Because of this, an errant equals sign can end up causing assignment when
     // the true intent was to do a comparison. Because of this ambiguity, it’s considered a best practice to not use assignment in return
@@ -382,15 +444,13 @@ module.exports = {
     // Missing elements are probably an accidentally duplicated comma.
     'no-sparse-arrays': SEVERITY,
 
-    // It can be easy to use the wrong quotes when wanting to use template literals, by writing "${variable}", and end up with the literal
-    // value "${variable}" instead of a string containing the value of the injected expressions.
+    // This rule aims to warn when a regular string contains what looks like a template literal placeholder.
     'no-template-curly-in-string': SEVERITY,
 
     // Throwing a string lacks any stack trace information and other important data properties
     'no-throw-literal': SEVERITY,
 
     // Keeps version control diffs clean as it prevents accidental whitespace from being committed.
-    // #hasFixer
     'no-trailing-spaces': SEVERITY,
 
     // Locate potential ReferenceErrors resulting from misspellings of variable and parameter names, or accidental implicit globals (for
@@ -398,7 +458,6 @@ module.exports = {
     'no-undef': SEVERITY,
 
     // A variable that is declared and not initialized to any value automatically gets the value of undefined.
-    // #hasFixer
     'no-undef-init': SEVERITY,
 
     // Since we are using TypeScript to define public vs private items, using a leading underscore can be confusing.
@@ -412,7 +471,6 @@ module.exports = {
     ],
 
     // Disallow ternary operators when simpler alternatives exist.
-    // #hasFixer
     'no-unneeded-ternary': SEVERITY,
 
     // Because the return, throw, break, and continue statements unconditionally exit a block of code, any statements after them cannot be
@@ -423,17 +481,10 @@ module.exports = {
     // mistake when they almost certainly mean `!(key in object)` to test that a key is not in an object.
     'no-unsafe-negation': SEVERITY,
 
-    // Detects potential errors where an assignment or function call was intended.
-    'no-unused-expressions': [
-      SEVERITY,
-      {
-        'allowTernary': true,
-        'allowShortCircuit': true,
-      },
-    ],
+    // Labels that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring.
+    'no-unused-labels': SEVERITY,
 
     // It’s unnecessary to use computed properties with literals.
-    // #hasFixer
     'no-useless-computed-key': SEVERITY,
 
     // Useless string concatenation is likely the result of refactoring where a variable was removed from the concatenation.
@@ -442,62 +493,41 @@ module.exports = {
     // Declaring variables using var has several edge case behaviors that make var unsuitable for modern code. Variables declared by var
     // have their parent function block as their scope, ignoring other control flow statements. vars have declaration “hoisting” (similar to
     // functions) and can appear to be used before declaration.
-    // #hasFixer
     'no-var': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'no-whitespace-before-property': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'object-curly-newline': [
       SEVERITY,
-      {
-        'ExportDeclaration': {
-          'minProperties': 2,
-          'multiline': true,
-        },
-        'ImportDeclaration': {
-          'minProperties': 2,
-          'multiline': true,
-        },
-        'ObjectExpression': {
-          'minProperties': 2,
-          'multiline': true,
-        },
-      },
+      { 'consistent': true },
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'object-curly-spacing': [
       SEVERITY,
       'always',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'object-property-newline': SEVERITY,
 
     // Enforces use of ES6 object literal shorthand.
-    // #hasFixer
     'object-shorthand': [
       SEVERITY,
       'always',
     ],
 
     // Separating declarations one-per-line creates a more readable style.
-    // #hasFixer
     'one-var': [
       SEVERITY,
       'never',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'operator-linebreak': [
-      'error',
+      SEVERITY,
       'before',
       {
         'overrides': {
@@ -506,20 +536,24 @@ module.exports = {
       },
     ],
 
+    // Prefer arrow functions
+    'prefer-arrow/prefer-arrow-functions': [
+      SEVERITY,
+      {
+        'singleReturnOnly': true,
+      },
+    ],
+
     // If a variable is never reassigned, using the const declaration is better.
-    // #hasFixer
     'prefer-const': SEVERITY,
 
     // Object spread allows for better type checking and inference.
-    // #hasFixer
     'prefer-object-spread': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'prefer-template': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'quotes': [
       SEVERITY,
       'single',
@@ -530,7 +564,6 @@ module.exports = {
     ],
 
     // Only property names which require quotes may be quoted (e.g. those with spaces in them).
-    // #hasFixer
     'quote-props': [
       SEVERITY,
       'consistent-as-needed',
@@ -541,48 +574,46 @@ module.exports = {
     'radix': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'rest-spread-spacing': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'semi-spacing': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'space-before-blocks': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'space-before-function-paren': [
       SEVERITY,
       'never',
     ],
 
-    // Comments are easier to read when there is a space between the comment marker and the first character.
-    // #hasFixer
+    // Helps to maintain a consistent, readable style in the codebase.
     'spaced-comment': [
       SEVERITY,
       'always',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'space-infix-ops': SEVERITY,
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'space-in-parens': [
       SEVERITY,
       'never',
     ],
 
     // Helps to maintain a consistent, readable style in the codebase.
-    // #hasFixer
     'space-unary-ops': SEVERITY,
 
+    // Because NaN is unique in JavaScript by not being equal to anything, including itself, the results of
+    // comparisons to NaN are confusing
+    'use-isnan': SEVERITY,
+
+    // It is usually a typing mistake to compare the result of a typeof operator to other string literals.
+    'valid-typeof': SEVERITY,
+
     // Use a more natural way to describe the comparison.
-    // #hasFixer
     'yoda': SEVERITY,
   },
 
@@ -590,7 +621,243 @@ module.exports = {
   /*
    * Override rules for specific file patterns
    */
-  //'overrides': [
-  // NOTE: Currently, override inheritence is not working so overrides are defined at the consumer level.
-  //],
+  'overrides': [
+    // TypeScript and Angular specific rules
+    {
+      'files': [
+        '*.ts',
+      ],
+      'plugins': [
+        // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/ROADMAP.md
+        '@typescript-eslint',
+        // https://github.com/angular-eslint/angular-eslint
+        '@angular-eslint',
+      ],
+      'parser': '@typescript-eslint/parser',
+      'parserOptions': {
+        'ecmaVersion': 2020,
+        'project': './tsconfig.json',
+        'sourceType': 'module',
+        'tsconfigRootDir': './',
+      },
+      'settings': {
+        'import/parsers': {
+          '@typescript-eslint/parser': [
+            '.ts',
+          ],
+        },
+        'import/resolver': {
+          'node': true,
+          'eslint-import-resolver-typescript': true,
+        },
+      },
+
+      'rules': {
+        // Ensures that classes use allowed lifecycle method in its body.
+        '@angular-eslint/contextual-lifecycle': SEVERITY,
+
+        // Consistent conventions make it easy to quickly identify and reference assets of different types.
+        '@angular-eslint/component-class-suffix': SEVERITY,
+
+        // a) Keeps the element names consistent with the specification for Custom Elements.
+        // b) Consistent conventions make it easy to quickly identify and reference assets of different types.
+        // c) Components are easy to identify in the DOM.
+        // See https://angular.io/styleguide#style-02-07 https://angular.io/styleguide#style-05-02 https://angular.io/styleguide#style-05-02
+        '@angular-eslint/component-selector': [
+          SEVERITY,
+          {
+            'type': 'element',
+            'style': 'kebab-case',
+          },
+        ],
+
+        // a) Consistent conventions make it easy to quickly identify and reference assets of different types.
+        // b) It is easier to recognize that a symbol is a directive by looking at the template’s HTML.
+        // See https://angular.io/styleguide#style-02-06 https://angular.io/styleguide#style-02-08
+        '@angular-eslint/directive-selector': [
+          SEVERITY,
+          {
+            'type': 'attribute',
+            'style': 'camelCase',
+          },
+        ],
+
+        // Large, inline templates and styles obscure the component’s purpose and implementation, reducing readability and maintainability.
+        '@angular-eslint/component-max-inline-declarations': [
+          SEVERITY,
+          {
+            'animations': 15,
+            'styles': 3,
+            'template': 3,
+          },
+        ],
+
+        // Ensures that directives not implement conflicting lifecycle interfaces.
+        '@angular-eslint/no-conflicting-lifecycle': SEVERITY,
+
+        // Explicit calls to lifecycle methods could be confusing. Invoke them is an Angular’s responsability.
+        '@angular-eslint/no-lifecycle-call': SEVERITY,
+
+        // Two names for the same property (one private, one public) is inherently confusing.
+        '@angular-eslint/no-input-rename': SEVERITY,
+
+        // a) It is easier and more readable to identify which properties in a class are inputs.
+        // b) If you ever need to rename the property name associated with @Input, you can modify it in a single place.
+        // c) The metadata declaration attached to the directive is shorter and thus more readable.
+        // See https://angular.io/styleguide#style-05-12
+        '@angular-eslint/no-inputs-metadata-property': SEVERITY,
+
+        // Listeners subscribed to an output with such a name will also be invoked when the native event is raised.
+        '@angular-eslint/no-output-native': SEVERITY,
+
+        // Angular allows for an alternative syntax on-*. If the event itself was prefixed with on this would result
+        // in an on-onEvent binding expression.
+        // See https://angular.io/guide/styleguide#dont-prefix-output-properties
+        '@angular-eslint/no-output-on-prefix': SEVERITY,
+
+        // Two names for the same property (one private, one public) is inherently confusing.
+        // See https://angular.io/styleguide#style-05-13
+        '@angular-eslint/no-output-rename': SEVERITY,
+
+        // a) It is easier and more readable to identify which properties in a class are events.
+        // b) If you ever need to rename the event name associated with @Output, you can modify it in a single place.
+        // c) The metadata declaration attached to the directive is shorter and thus more readable.
+        // See https://angular.io/styleguide#style-05-12
+        '@angular-eslint/no-outputs-metadata-property': SEVERITY,
+
+        // Impure pipes do not perform well because they run on every change detection cycle.
+        '@angular-eslint/no-pipe-impure': SEVERITY,
+
+        // Prefer to declare @Output as readonly since they should not be reassigned.
+        '@angular-eslint/prefer-output-readonly': SEVERITY,
+
+        // Omitting the component selector makes debugging difficult.
+        '@angular-eslint/use-component-selector': SEVERITY,
+
+        // Interfaces prescribe typed method signatures. Use those signatures to flag spelling and syntax mistakes.
+        '@angular-eslint/use-lifecycle-interface': SEVERITY,
+
+        // Interfaces prescribe typed method signatures. Use those signatures to flag spelling and syntax mistakes.
+        '@angular-eslint/use-pipe-decorator': SEVERITY,
+
+        // Interfaces prescribe typed method signatures. Use those signatures to flag spelling and syntax mistakes.
+        '@angular-eslint/use-pipe-transform-interface': SEVERITY,
+
+        // JavaScript and general programming convention is to refer to classes in PascalCase.
+        // It can be confusing to use camelCase or other conventions for class names.
+        '@typescript-eslint/class-name-casing': SEVERITY,
+
+        // Interfaces are generally preferred over type literals because interfaces can be implemented, extended and merged.
+        '@typescript-eslint/consistent-type-definitions': SEVERITY,
+
+        // Explicit visibility declarations can make code more readable and accessible for those new to TS. Members lacking a visibility
+        // declaration may be an indication of an accidental leak of class internals.
+        '@typescript-eslint/explicit-member-accessibility': [
+          SEVERITY,
+          { 'overrides': { 'constructors': 'no-public' } },
+        ],
+
+        // An interface or literal type with just a call signature can be written as a function type.
+        '@typescript-eslint/prefer-function-type': SEVERITY,
+
+        // Using any as a type declaration nullifies the compile-time benefits of the type system.
+        '@typescript-eslint/no-explicit-any': SEVERITY,
+
+        // Explicit types where they can be easily inferred by the compiler make code more verbose.
+        '@typescript-eslint/no-inferrable-types': SEVERITY,
+
+        // Interfaces in TypeScript are not meant to describe constructors on their implementations.
+        '@typescript-eslint/no-misused-new': SEVERITY,
+
+        // Using non-null assertion cancels the benefits of the strict null checking mode.
+        '@typescript-eslint/no-non-null-assertion': SEVERITY,
+
+        // Comparing boolean values to boolean literals is unnecessary, as those expressions will result in booleans too.
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': SEVERITY,
+
+        // This rule prohibits using a type assertion that does not change the type of an expression.
+        '@typescript-eslint/no-unnecessary-type-assertion': SEVERITY,
+
+        // Detects potential errors where an assignment or function call was intended.
+        '@typescript-eslint/no-unused-expressions': [
+          SEVERITY,
+          {
+            'allowTernary': true,
+            'allowShortCircuit': true,
+          },
+        ],
+
+        // For cases where the index is only used to read from the array being iterated, a for-of loop is easier to read and write.
+        '@typescript-eslint/prefer-for-of': SEVERITY,
+
+        // When adding two variables, operands must both be of type number or of type string
+        '@typescript-eslint/restrict-plus-operands': SEVERITY,
+
+        // Helps to maintain a consistent, readable style in the codebase.
+        '@typescript-eslint/semi': SEVERITY,
+
+        // Helps to maintain a consistent, readable style in the codebase.
+        '@typescript-eslint/type-annotation-spacing': DISABLED,
+
+        // Warns for any two overloads that could be unified into one by using a union or an optional/rest parameter.
+        '@typescript-eslint/unified-signatures': SEVERITY,
+      },
+    },
+
+    // All test and mock files
+    {
+      'files': [
+        '**/*.spec.ts',
+        '**/*.mock.ts',
+        // Sass test file:
+        '**/test-sass.js',
+        // Test helper files:
+        '**/test-helpers.ts',
+        // Test component files:
+        '**/test-components.ts',
+      ],
+      'env': {
+        'jest': true,
+      },
+      'rules': {
+        '@typescript-eslint/no-explicit-any': DISABLED,
+        '@typescript-eslint/no-non-null-assertion': DISABLED,
+        '@angular-eslint/component-selector': DISABLED,
+        '@angular-eslint/directive-selector': DISABLED,
+        '@angular-eslint/component-class-suffix': DISABLED,
+        '@angular-eslint/use-component-selector': DISABLED,
+        '@angular-eslint/component-max-inline-declarations': DISABLED,
+        '@angular-eslint/no-lifecycle-call': DISABLED,
+        '@typescript-eslint/explicit-member-accessibility': DISABLED,
+        'dot-notation': DISABLED,
+        'guard-for-in': DISABLED,
+        'jsdoc/require-jsdoc': DISABLED,
+        'line-comment-position': DISABLED,
+        'no-console': DISABLED,
+        '@typescript-eslint/no-magic-numbers': DISABLED,
+        'no-multiple-empty-lines': [
+          SEVERITY,
+          {
+            'max': 1,
+          },
+        ],
+        'no-underscore-dangle': DISABLED,
+        'padded-blocks': [
+          SEVERITY,
+          'never',
+        ],
+      },
+    },
+
+    // HTML files
+    {
+      'files': [
+        '**/*.component.html',
+      ],
+      'parser': '@angular-eslint/template-parser',
+      'plugins': [
+        '@angular-eslint/template',
+      ],
+    },
+  ],
 };
