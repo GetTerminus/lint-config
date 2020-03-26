@@ -39,10 +39,7 @@ module.exports = {
 
   'scopes': [
     {
-      'name': 'CIRules',
-    },
-    {
-      'name': 'DevRules',
+      'name': 'Rules',
     },
     {
       'name': 'SpecRules',

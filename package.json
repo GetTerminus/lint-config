@@ -14,15 +14,17 @@
   "bugs": {
     "url": "https://github.com/GetTerminus/eslint-config-frontend/issues"
   },
-  "main": "./ci.js",
+  "main": "rules.js",
   "scripts": {
     "//=> Section: Linting": "==============================",
-    "lint": "npx eslint ci.js development.js .eslintrc.js --no-ignore --fix",
-    "lint:ci": "npx eslint ci.js development.js .eslintrc.js --no-ignore",
+    "lint": "npx eslint rules.js .eslintrc.js --no-ignore",
+    "lint:fix": "npx eslint rules.js .eslintrc.js --no-ignore --fix",
+    "lint:ci": "yarn run lint",
     "//=> Section: Release": "==============================",
     "semantic-release": "semantic-release",
     "check:next-release": "npx semantic-release --no-ci --dry-run",
     "//=> Section: Tooling": "==============================",
+    "docs": "yarn run docs:toc",
     "docs:toc": "npx doctoc --title '**Table of Contents**' --maxlevel 3 README.md",
     "lint-staged": "lint-staged",
     "validate:circleci": "circleci config validate -c .circleci/config.yml",
@@ -50,8 +52,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn run lint",
-      "git add"
+      "yarn run lint"
     ]
   },
   "publishConfig": {
@@ -118,29 +119,32 @@
     "yarn": ">= 1.0.0"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.6.0",
-    "@typescript-eslint/eslint-plugin-tslint": "^2.6.0",
-    "@typescript-eslint/parser": "^2.6.0"
+    "@angular-eslint/eslint-plugin": "0.0.1-alpha.27",
+    "@angular-eslint/eslint-plugin-template": "0.0.1-alpha.27",
+    "@angular-eslint/template-parser": "0.0.1-alpha.27",
+    "@typescript-eslint/eslint-plugin": "2.25.0",
+    "@typescript-eslint/parser": "2.25.0"
   },
   "peerDependencies": {
-    "@angular/compiler": ">=8.0.0",
-    "@angular/core": ">=8.0.0",
-    "eslint": "^5.16.0",
-    "tslint": "^5.17.0"
+    "@angular/compiler": ">=9.1.0",
+    "@angular/core": ">=9.1.0",
+    "eslint": "^6.8.0",
+    "typescript": "3.8.3"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^3.0.2",
-    "@semantic-release/git": "^7.0.8",
-    "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.7",
-    "@semantic-release/release-notes-generator": "^7.1.4",
-    "condition-circle": "^2.0.2",
-    "cz-customizable": "^6.2.0",
-    "doctoc": "^1.4.0",
-    "husky": "^4.0.2",
-    "lint-staged": "^9.4.2",
-    "semantic-release": "^15.13.12",
-    "typescript": "~3.6.4",
-    "validate-commit-msg": "^2.14.0"
+    "@semantic-release/changelog": "3.0.4",
+    "@semantic-release/git": "7.0.16",
+    "@semantic-release/github": "5.4.3",
+    "@semantic-release/npm": "5.1.15",
+    "@semantic-release/release-notes-generator": "7.3.0",
+    "condition-circle": "2.0.2",
+    "cz-customizable": "6.2.0",
+    "doctoc": "1.4.0",
+    "eslint": "6.8.0",
+    "husky": "4.2.3",
+    "lint-staged": "10.0.9",
+    "semantic-release": "15.13.14",
+    "typescript": "3.8.3",
+    "validate-commit-msg": "2.14.0"
   }
 }
