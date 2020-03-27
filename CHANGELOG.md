@@ -1,3 +1,23 @@
+# [2.0.0](https://github.com/GetTerminus/eslint-config-frontend/compare/v1.1.1...v2.0.0) (2020-03-27)
+
+
+### Bug Fixes
+
+* **Build:** rebuild lock file ([ba91357](https://github.com/GetTerminus/eslint-config-frontend/commit/ba9135780d6ee4f25c1786b9d69f5b14370d68c3))
+
+
+### Features
+
+* **Rules:** combine all rulesets ([23663fb](https://github.com/GetTerminus/eslint-config-frontend/commit/23663fb47c29b3ea3af35f1a817130b5f70786fb))
+
+
+### BREAKING CHANGES
+
+* **Rules:** - Rule changes
+- Dependency changes
+- Typescript version
+- Config changes
+
 ## <small>1.1.1 (2020-02-03)</small>
 
 * fix(CIRules): remove file overrides ([fe0f4b8](https://github.com/GetTerminus/eslint-config-frontend/commit/fe0f4b8))
