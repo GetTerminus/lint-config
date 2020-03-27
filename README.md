@@ -42,7 +42,13 @@ $ yarn add eslint \
   @angular-eslint/eslint-plugin-template \
   @angular-eslint/template-parser \
   @typescript-eslint/eslint-plugin \
-  @typescript-eslint/parser -D
+  @typescript-eslint/parser \
+  eslint-import-resolver-typescript \
+  eslint-plugin-deprecation \
+  eslint-plugin-import \
+  eslint-plugin-jsdoc \
+  eslint-plugin-prefer-arrow \
+  -D
 ```
 
 
@@ -68,8 +74,8 @@ module.exports = {
 };
 ```
 
-NOTE: If your primary TSConfig file is at the project root and named `tsconfig.json` *you need to overwrite the parser
-options to point to your config file*.
+NOTE: If your primary TSConfig file is *NOT* at the project root and named `tsconfig.json` *you need to overwrite the
+parser options to point to your config file*.
 
 ```javascript
 module.exports = {
@@ -123,7 +129,7 @@ Rules can be adjusted for specific globs at the consumer level using [ESLint fil
 
 ```javascript
 module.exports = {
-  "extends": ['@terminus/eslint-config-frontend/development'],
+  "extends": ['@terminus/eslint-config-frontend'],
   "overrides": [
     // Disable certain rules for spec and mock files:
     {
