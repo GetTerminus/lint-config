@@ -1,3 +1,16 @@
+## [2.0.1](https://github.com/GetTerminus/eslint-config-frontend/compare/v2.0.0...v2.0.1) (2020-03-27)
+
+
+### Bug Fixes
+
+* **Rules:** allow more comments to bypass no-fallthrough ([f19714a](https://github.com/GetTerminus/eslint-config-frontend/commit/f19714ae40f17869df43dc771bbbf8d5c8a790a5))
+* correct installation docs ([e7589ae](https://github.com/GetTerminus/eslint-config-frontend/commit/e7589ae7120d1fba6bc62d0097546cb987df770f))
+
+
+### Reverts
+
+* **Rules:** no longer requiring JSDoc comments ([d5b6e2b](https://github.com/GetTerminus/eslint-config-frontend/commit/d5b6e2b372bbe1e660e98a2018b15b03ad49a40b))
+
 # [2.0.0](https://github.com/GetTerminus/eslint-config-frontend/compare/v1.1.1...v2.0.0) (2020-03-27)
 
 ### Features
