@@ -1,22 +1,200 @@
 # [2.0.0](https://github.com/GetTerminus/eslint-config-frontend/compare/v1.1.1...v2.0.0) (2020-03-27)
 
-
-### Bug Fixes
-
-* **Build:** rebuild lock file ([ba91357](https://github.com/GetTerminus/eslint-config-frontend/commit/ba9135780d6ee4f25c1786b9d69f5b14370d68c3))
-
-
 ### Features
 
 * **Rules:** combine all rulesets ([23663fb](https://github.com/GetTerminus/eslint-config-frontend/commit/23663fb47c29b3ea3af35f1a817130b5f70786fb))
 
-
 ### BREAKING CHANGES
 
-* **Rules:** - Rule changes
-- Dependency changes
-- Typescript version
-- Config changes
+- Rule changes/removals/additions
+- Dependency changes & updates
+- Typescript requirement
+- Configuration changes
+
+### Migration Notes
+
+#### 1. Upgrade all dependencies:
+```
+$ yarn add eslint \
+  @terminus/eslint-config-frontend \
+  @angular-eslint/eslint-plugin \
+  @angular-eslint/eslint-plugin-template \
+  @angular-eslint/template-parser \
+  @typescript-eslint/eslint-plugin \
+  @typescript-eslint/parser \
+  eslint-import-resolver-typescript \
+  eslint-plugin-deprecation \
+  eslint-plugin-import \
+  eslint-plugin-jsdoc \
+  eslint-plugin-prefer-arrow \
+  -D
+```
+
+#### 2. Upgrade TypeScript and Angular
+
+- TypeScript: `3.8.3`
+- Angular: `>=9.0.0`
+
+#### 3. Remove all TSLint related dependencies:
+```
+yarn remove @terminus/tslint-config-frontend tslint
+```
+
+#### 4. Delete all `tslint.json` configuration files:
+e.g. `tslint.json`, `tslint.ci.json`, `tslint.spec.json`, etc
+
+#### 5. Remove any `package.json` scripts referring to TSLint
+e.g. `"lint:ts": "tslint --config tslint.ci.json ...",`
+
+#### 6. Update any existing ESLint `package.json` scripts
+Update all commands to reference the base `.eslintrc.js` file.
+
+> NOTE: As always, these instructions are for an out-of-the-box setup. If your application requires multiple
+> configuration files, continue using them as needed.
+
+#### 7.  Delete all `eslintrc` configuration files _except_ your base `.eslintrc.js`:
+e.g. `.eslintrc.ci.js`, etc
+
+> NOTE: These instructions are for *required configuration only*. So if, for example, your setup needs a secondary
+> configuration for CI, that is still fully supported.
+
+#### 8. In the remaining `.eslintrc.js` file, update the 'extends' option:
+```diff
+module.exports = {
+-  "extends": ["@terminus/eslint-config-frontend/development"],
++  "extends": ["@terminus/eslint-config-frontend"],
+  ...
+}
+```
+
+NOTE: If your primary TSConfig file is **NOT** at the project root or **NOT** named `tsconfig.json` you need to
+**overwrite the parser options to point to your config file**.
+
+```
+module.exports = {
+  extends: ['@terminus/eslint-config-frontend'],
+  parserOptions: {
+    project: './my/custom/tsconfig.special.json',
+  }
+};
+```
+
+#### 9. Convert all `tslint-disable` comments to ESLint format
+Here are the primary offenders:
+
+```
+-// tslint:disable-next-line no-any
++// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+-// tslint:disable: no-unused-variable
+No replacement but you can tell TypeScript to ignore the line with `// @ts-ignore`
+
+-// tslint:disable: no-non-null-assertion
+No longer enforced
+
+-// tslint:disable: max-line-length
++// eslint:disable: max-len
+
+-// tslint:disable: member-ordering
+No longer enforced
+
+-// tslint:disable: template-no-call-expression
+No longer enforced
+```
+
+For manual replacement you should be able to let your IDE add the correct comment to silence a rule for you.
+
+#### 10. Rule Changes
+Below are the breaking rule changes. The parity between TSLint and ESLint is not 1-1 so this list may not be exhaustive.
+
+##### `prefer-on-push-component-change-detection`
+Previously this ruleset was enforcing the rule `prefer-on-push-component-change-detection` which was never meant to be
+in the base ruleset. This has been removed from the default ruleset.
+
+If this rule is needed, it can enabled by consumers under the new name
+`@angular-eslint/prefer-on-push-component-change-detection`.
+
+##### `template-no-negated-async`
+This rule is no longer in the ruleset.
+
+#### `no-fallthrough`
+The regex has been updated to allow a wider array of comments:
+
+```
+// Any of these comments would silence the 'no-fallthrough' error (not an exhaustive list)
+break omitted
+breaks omitted
+fall-through
+falls through
+Falls through
+// caution: omitted intentionally
+```
+
+#### `member-ordering`
+This rule had several issues and has been removed.
+
+#### `no-unused-variable`
+This rule is no longer supported. The TSConfig flag `noUnusedLocals` is the recommended replacement:
+
+```
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+  }
+}
+```
+
+#### JSDoc
+Several JSDoc format and structure based rules have been added. We currently do not enforce JSDocs everywhere. If your
+team does enforce this (such as UXE) you can enable this rule in your own `.eslintrc.js`:
+
+```
+'jsdoc/require-jsdoc': 'error',
+```
+
+#### `prefer-arrow-functions`
+This rule has a known issue when using the `--fix` flag when refactoring functions with types:
+
+```
+// When converting this:
+function createComponent<T>(component: Type<T>): ComponentFixture<T> {
+  return createComponentInner<T>(
+    //...etc
+
+// It will incorrectly place the type on the right side of the `=`:
+const createComponent<T> = (component: Type<T>): ComponentFixture<T> => createComponentInner<T>(
+
+// Correct format:
+const createComponent = <T>(component: Type<T>): ComponentFixture<T> => createComponentInner<T>(
+```
+
+We opted to use the automatic fix and then manually adjust any that were incorrectly migrated.
+
+
+#### 11. Add any newly needed overrides
+Rules can be adjusted for specific globs at the consumer level using
+[ESLint file overrides](https://eslint.org/docs/user-guide/configuring#disabling-rules-only-for-a-group-of-files):
+
+> NOTE: Several rules are already disabled for `.spec` and `.mock` files.
+
+```javascript
+module.exports = {
+  "extends": ['@terminus/eslint-config-frontend'],
+  "overrides": [
+    {
+      "files": [
+        "*.spec.ts",
+        "*.mock.ts",
+      ],
+      "rules": {
+        "no-magic-numbers": "off",
+      },
+    },
+  ],
+};
+```
+
+Upgrade complete!
 
 ## <small>1.1.1 (2020-02-03)</small>
 
@@ -83,3 +261,6 @@
 ## 1.0.0 (2019-04-16)
 
 * feat: Rulesets and Docs finalized
+
+
+[eslint-file-overrides]:
