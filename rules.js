@@ -336,7 +336,7 @@ module.exports = {
       SEVERITY,
       {
         // A fallthrough is only allowed when a comment is added explicitly calling out the unique behavior.
-        'commentPattern': 'break[\\s\\w]*omitted',
+        'commentPattern': '[fF]alls?.[tT]hrough|[bB]reak|intentional',
       },
     ],
 
