@@ -222,7 +222,6 @@ module.exports = {
     ],
     'jsdoc/newline-after-description': SEVERITY,
     'jsdoc/require-hyphen-before-param-description': SEVERITY,
-    'jsdoc/require-jsdoc': SEVERITY,
     'jsdoc/require-param': SEVERITY,
     'jsdoc/no-types': SEVERITY,
     'jsdoc/valid-types': SEVERITY,
