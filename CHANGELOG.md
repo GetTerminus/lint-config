@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/GetTerminus/eslint-config-frontend/compare/v2.0.1...v2.0.2) (2020-04-13)
+
+
+### Bug Fixes
+
+* **Build:** update all dependencies ([f009837](https://github.com/GetTerminus/eslint-config-frontend/commit/f009837ec41d06b1858da59c93ddc0e2c9b0118a))
+
 ## [2.0.1](https://github.com/GetTerminus/eslint-config-frontend/compare/v2.0.0...v2.0.1) (2020-03-27)
 
 
