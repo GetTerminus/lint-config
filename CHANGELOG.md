@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/GetTerminus/eslint-config-frontend/compare/v2.0.2...v2.0.3) (2020-04-14)
+
+
+### Bug Fixes
+
+* **package:** update @typescript-eslint/eslint-plugin to version 2.28.0 ([9e9185e](https://github.com/GetTerminus/eslint-config-frontend/commit/9e9185ef9cf1db241fc55e231ac465f8527119b0))
+
 ## [2.0.2](https://github.com/GetTerminus/eslint-config-frontend/compare/v2.0.1...v2.0.2) (2020-04-13)
 
 
