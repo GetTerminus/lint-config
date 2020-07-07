@@ -1,5 +1,20 @@
 <h1>Terminus ESLint Frontend Configuration</h1>
 
+---
+
+<h2>:rotating_light: ATTENTION: THIS REPO HAS MOVED :rotating_light:</h2>
+
+We have moved to separately published packages from a monorepo.
+
+Please update any bookmarks to point to the new repo:
+[https://github.com/GetTerminus/terminus-oss](https://github.com/GetTerminus/terminus-oss)
+
+NOTE: This package will still be published to the existing NPM package.
+
+<h2>:rotating_light:</h2>
+
+---
+
 [![NPM version][npm-version-image]][npm-url]
 [![Github release][gh-release-badge]][gh-releases]
 [![CircleCI][circle-badge]][circle-link]
@@ -11,9 +26,7 @@
 [![ZenHub][zenhub-image]][zenhub-url]
 [![MIT License][license-image]][license-url]
 
-
 A collection of JavaScript & TypeScript lint rules for Terminus frontend codebases.
-
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
