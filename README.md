@@ -6,8 +6,7 @@
 
 We have moved to separately published packages from a monorepo.
 
-Please update any bookmarks to point to the new repo:
-[https://github.com/GetTerminus/terminus-oss](https://github.com/GetTerminus/terminus-oss)
+Please update any bookmarks to point to the [new repo][new-repo].
 
 NOTE: This package will still be published to the existing NPM package.
 
@@ -182,3 +181,4 @@ module.exports = {
 [david-dev-badge]:        https://david-dm.org/GetTerminus/eslint-config-frontend/dev-status.svg
 [david-badge]:            https://david-dm.org/GetTerminus/eslint-config-frontend.svg
 [david-link]:             https://david-dm.org/GetTerminus/eslint-config-frontend?view=list
+[new-repo]:               https://github.com/GetTerminus/terminus-oss/tree/release/libs/eslint-config-frontend
